@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><rect width="256" height="256" rx="48" fill="#FFFFFF"/>
+<path d="M70 70 h86 l30 30 -30 30 h-86 l30 -30 z" fill="#0B5FA5"/>
+<path d="M100 120 h86 l-30 30 30 30 h-86 l-30 -30 z" fill="#36A3E0" transform="translate(0 -6)"/>
+<text x="128" y="206" text-anchor="middle" font-family='Helvetica Neue, Arial, sans-serif' font-size="34" font-weight="800" fill="#0B2E4F" letter-spacing="1">SHEGER</text>
+<text x="128" y="228" text-anchor="middle" font-family='Helvetica Neue, Arial, sans-serif' font-size="14" font-weight="600" fill="#0B5FA5" letter-spacing="5">LOGISTICS</text></svg>

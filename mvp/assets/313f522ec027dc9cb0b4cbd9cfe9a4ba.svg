@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><rect width="256" height="256" rx="48" fill="#3E2A6E"/>
+<g fill="none" stroke-width="10" stroke-linecap="round">
+<path d="M70 70 C100 110 156 70 186 110" stroke="#F4C04E"/>
+<path d="M70 100 C100 140 156 100 186 140" stroke="#E86A92"/>
+<path d="M70 130 C100 170 156 130 186 170" stroke="#9AD0F5"/></g>
+<text x="128" y="212" text-anchor="middle" font-family='Helvetica Neue, Arial, sans-serif' font-size="36" font-weight="800" fill="#FFFFFF" letter-spacing="3">GIHON</text>
+<text x="128" y="234" text-anchor="middle" font-family='Helvetica Neue, Arial, sans-serif' font-size="14" font-weight="600" fill="#F4C04E" letter-spacing="6">TEXTILE</text></svg>
