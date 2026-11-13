@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<title>CareLend Partner HR Portal</title>
+<link rel="icon" href="/assets/carelend-logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap">
+<style>body{margin:0;background:#F2F2F2;font-family:Outfit,system-ui,sans-serif}#boot{display:flex;align-items:center;justify-content:center;min-height:100vh;color:#6F6F6F;font-size:14px}</style></head>
+<body><div id="root"><div id="boot">Loading CareLend Partner HR Portal…</div></div>
+<script>/* Self-contained renderer for Claude Design (.dc.html) artboards, so the canvas prototype runs as a plain website. */
+(function () {
+  'use strict';
+  var VOID = { area: 1, base: 1, br: 1, col: 1, embed: 1, hr: 1, img: 1, input: 1, link: 1, meta: 1, source: 1, track: 1, wbr: 1 };
+  var RAW = { script: 1, style: 1, textarea: 1, title: 1 };
+  var NO_WS = { table: 1, thead: 1, tbody: 1, tfoot: 1, tr: 1, select: 1, colgroup: 1 };
+  var PROPS = { value: 1, checked: 1, selected: 1, disabled: 1 };
+  var SVGNS = 'http://www.w3.org/2000/svg';
+
+  var decoder = document.createElement('textarea');
+  function decode(s) { if (s.indexOf('&') < 0) return s; decoder.innerHTML = s; return decoder.value; }
+
+  /* ---- tolerant HTML parser that keeps attribute case ---- */
+  function parse(src) {
+    var root = { tag: '#root', attrs: {}, children: [] }, stack = [root], i = 0, n = src.length, low = src.toLowerCase();
+    function top() { return stack[stack.length - 1]; }
+    while (i < n) {
+      if (src.charCodeAt(i) === 60) {
+        if (src.startsWith('<!--', i)) { var e = src.indexOf('-->', i + 4); i = e < 0 ? n : e + 3; continue; }
+        if (src[i + 1] === '!' || src[i + 1] === '?') { i = src.indexOf('>', i) + 1 || n; continue; }
+        if (src[i + 1] === '/') {
+          var ce = src.indexOf('>', i); var ct = low.slice(i + 2, ce).trim(); i = ce + 1;
+          for (var k = stack.length - 1; k > 0; k--) { if (stack[k].tag === ct) { stack.length = k; break; } }
+          continue;
+        }
+        var m = /^<([a-zA-Z][\w:-]*)/.exec(src.slice(i, i + 64));
+        if (!m) { top().children.push('<'); i++; continue; }
+        var tag = m[1].toLowerCase(), j = i + m[0].length, attrs = {}, selfClose = false;
+        while (j < n) {
+          while (/\s/.test(src[j])) j++;
+          if (src[j] === '>') { j++; break; }
+          if (src[j] === '/' && src[j + 1] === '>') { selfClose = true; j += 2; break; }
+          var am = /^[^\s=>\/]+/.exec(src.slice(j, j + 128)); if (!am) { j++; continue; }
+          var an = am[0], av = ''; j += an.length;
+          while (/\s/.test(src[j])) j++;
+          if (src[j] === '=') {
+            j++; while (/\s/.test(src[j])) j++;
+            var q = src[j];
+            if (q === '"' || q === "'") { var qe = src.indexOf(q, j + 1); av = src.slice(j + 1, qe); j = qe + 1; }
+            else { var um = /^[^\s>]+/.exec(src.slice(j, j + 512)); av = um ? um[0] : ''; j += av.length; }
+          }
+          attrs[an] = decode(av);
+        }
+        var node = { tag: tag, attrs: attrs, children: [] };
+        top().children.push(node); i = j;
+        if (RAW[tag] && !selfClose) {
+          var re = low.indexOf('</' + tag, i); if (re < 0) re = n;
+          var txt = src.slice(i, re); if (txt) node.children.push(tag === 'textarea' || tag === 'title' ? decode(txt) : txt);
+          i = src.indexOf('>', re) + 1 || n; continue;
+        }
+        if (!VOID[tag] && !selfClose) stack.push(node);
+        continue;
+      }
+      var lt = src.indexOf('<', i); if (lt < 0) lt = n;
+      top().children.push(decode(src.slice(i, lt))); i = lt;
+    }
+    return root;
+  }
+  function find(node, pred, all) {
+    var out = [];
+    (function walk(nd) { if (typeof nd === 'string') return; if (pred(nd)) { out.push(nd); if (!all) return; } nd.children.forEach(walk); })(node);
+    return all ? out : out[0] || null;
+  }
+  function textOf(node) { return node ? node.children.filter(function (c) { return typeof c === 'string'; }).join('') : ''; }
+
+  /* ---- holes ---- */
+  var HOLE = /\{\{\s*([^}]*?)\s*\}\}/g, WHOLE = /^\s*\{\{\s*([^}]*?)\s*\}\}\s*$/;
+  function lookup(expr, scope) {
+    if (expr === 'true') return true; if (expr === 'false') return false;
+    if (expr === 'null') return null; if (expr === 'undefined') return undefined;
+    if (/^-?\d+(\.\d+)?$/.test(expr)) return Number(expr);
+    if (/^(['"]).*\1$/.test(expr)) return expr.slice(1, -1);
+    var parts = expr.split('.'), v;
+    for (var s = scope; s; s = s.__parent) { if (Object.prototype.hasOwnProperty.call(s, parts[0])) { v = s[parts[0]]; break; } }
+    for (var i = 1; i < parts.length && v != null; i++) v = v[parts[i]];
+    return v;
+  }
+  function interp(str, scope) {
+    if (str.indexOf('{{') < 0) return str;
+    return str.replace(HOLE, function (_, e) { var v = lookup(e, scope); return v == null || v === false ? '' : String(v); });
+  }
+  function rawOrStr(str, scope) { var m = WHOLE.exec(str); return m ? lookup(m[1], scope) : interp(str, scope); }
+
+  function routeFor(href) {
+    var m = /^(?:\.\/|\/)?([\w.\/-]*?)\.dc\.html(#.*)?$/.exec(href || '');
+    if (!m) return null;
+    var name = m[1].split('/').pop();
+    return name === 'Home' ? '/' : '/' + name;
+  }
+
+  /* ---- template → virtual nodes ---- */
+  function build(children, scope, parentTag, out) {
+    for (var i = 0; i < children.length; i++) {
+      var c = children[i];
+      if (typeof c === 'string') {
+        if (!/\S/.test(c)) { if (!NO_WS[parentTag]) out.push(' '); continue; }
+        out.push(interp(c, scope)); continue;
+      }
+      var t = c.tag, a = c.attrs;
+      if (t === 'sc-if') { if (rawOrStr(a.value || '', scope)) build(c.children, scope, parentTag, out); continue; }
+      if (t === 'sc-for') {
+        var list = rawOrStr(a.list || '', scope), as = a.as || 'item';
+        if (Array.isArray(list)) list.forEach(function (item, idx) { var s = { __parent: scope, $index: idx }; s[as] = item; build(c.children, s, parentTag, out); });
+        continue;
+      }
+      if (t === 'helmet' || t === 'script') continue;
+      if (t === 'dc-import') {
+        var props = {};
+        Object.keys(a).forEach(function (k) {
+          if (k === 'name' || k.indexOf('hint-') === 0) return;
+          props[k.replace(/-([a-z])/g, function (_, l) { return l.toUpperCase(); })] = rawOrStr(a[k], scope);
+        });
+        out.push({ comp: a.name.replace(/\.dc\.html$/, ''), props: props });
+        continue;
+      }
+      var p = {};
+      for (var k in a) {
+        if (k.indexOf('hint-') === 0) continue;
+        var v = rawOrStr(a[k], scope);
+        if (t === 'a' && k === 'href') { var r = routeFor(v); if (r) { p['data-route'] = r; v = r; } }
+        p[k] = v;
+      }
+      var kids = [];
+      if (t === 'textarea') { var tv = c.children.join(''); if (!('value' in p)) p.__default = tv; }
+      else if (!VOID[t]) build(c.children, scope, t, kids);
+      out.push({ tag: t, props: p, children: kids });
+    }
+    return out;
+  }
+
+  /* ---- DOM patching ---- */
+  function eventName(el, k) {
+    var e = k.slice(2).toLowerCase();
+    if (e === 'change') {
+      var tg = el.tagName, ty = (el.type || '').toLowerCase();
+      if (tg === 'TEXTAREA' || (tg === 'INPUT' && ty !== 'checkbox' && ty !== 'radio' && ty !== 'file')) return 'input';
+    }
+    if (e === 'doubleclick') return 'dblclick';
+    return e;
+  }
+  function dispatch(ev) { var f = this.__h && this.__h[ev.type]; if (f) f.call(this, ev); }
+  function setProps(el, old, nw, created) {
+    var controlled = 'onChange' in nw || 'onInput' in nw;
+    for (var k in old) if (!(k in nw)) {
+      if (/^on[A-Z]/.test(k)) { if (el.__h) el.__h[eventName(el, k)] = null; }
+      else if (PROPS[k] && k !== 'value') { el[k] = false; el.removeAttribute(k); }
+      else el.removeAttribute(k === 'className' ? 'class' : k);
+    }
+    for (var key in nw) {
+      var v = nw[key];
+      if (key === '__default') { if (created) el.value = v; continue; }
+      if (/^on[A-Z]/.test(key)) {
+        var en = eventName(el, key); el.__h = el.__h || {};
+        if (!el.__l || !el.__l[en]) { el.__l = el.__l || {}; el.__l[en] = 1; el.addEventListener(en, dispatch); }
+        el.__h[en] = typeof v === 'function' ? v : null; continue;
+      }
+      if (PROPS[key] && (el.tagName === 'INPUT' || el.tagName === 'SELECT' || el.tagName === 'TEXTAREA' || el.tagName === 'OPTION' || el.tagName === 'BUTTON' || el.tagName === 'FIELDSET')) {
+        var bool = key !== 'value';
+        var val = bool ? (v === '' ? true : v === 'false' ? false : !!v) : (v == null ? '' : String(v));
+        if (key === 'value' && !controlled && !created && el.tagName !== 'OPTION') continue;
+        if (key === 'checked' && !controlled && !created) continue;
+        if (bool) { if (val) el.setAttribute(key, ''); else el.removeAttribute(key); }
+        else el.setAttribute('value', val);
+        if (el[key] !== val) el[key] = val;
+        continue;
+      }
+      if (old[key] === v && !created) continue;
+      if (v == null || v === false && key.indexOf('aria-') !== 0) { el.removeAttribute(key); continue; }
+      if (typeof v === 'function' || typeof v === 'object') continue;
+      el.setAttribute(key, String(v));
+    }
+  }
+  function create(vn, svg, ctx) {
+    if (typeof vn === 'string') return document.createTextNode(vn);
+    if (vn.comp) {
+      var host = document.createElement('div'); host.style.display = 'contents';
+      host.__inst = instantiate(vn.comp, vn.props, host, ctx); return host;
+    }
+    var isSvg = svg || vn.tag === 'svg';
+    var el = isSvg ? document.createElementNS(SVGNS, vn.tag) : document.createElement(vn.tag);
+    patchChildren(el, [], vn.children, isSvg && vn.tag !== 'foreignobject', ctx);
+    setProps(el, {}, vn.props, true);
+    el.__vn = vn; return el;
+  }
+  function same(a, b) {
+    if (typeof a === 'string' || typeof b === 'string') return typeof a === typeof b;
+    if (a.comp || b.comp) return a.comp === b.comp;
+    return a.tag === b.tag && (a.tag !== 'input' || a.props.type === b.props.type);
+  }
+  function patch(dom, oldVn, vn, svg, ctx) {
+    if (typeof vn === 'string') { if (dom.nodeValue !== vn) dom.nodeValue = vn; return; }
+    if (vn.comp) { var inst = dom.__inst; inst.props = Object.assign({}, inst.defaults, vn.props); inst.update(); return; }
+    var isSvg = svg || vn.tag === 'svg';
+    patchChildren(dom, oldVn.children, vn.children, isSvg && vn.tag !== 'foreignobject', ctx);
+    setProps(dom, oldVn.props, vn.props, false);
+    dom.__vn = vn;
+  }
+  function patchChildren(parent, oldKids, kids, svg, ctx) {
+    var nodes = parent.childNodes, i;
+    for (i = 0; i < kids.length; i++) {
+      var dom = nodes[i], ov = oldKids[i];
+      if (dom && ov !== undefined && same(ov, kids[i])) patch(dom, ov, kids[i], svg, ctx);
+      else { var el = create(kids[i], svg, ctx); if (dom) parent.replaceChild(el, dom); else parent.appendChild(el); }
+    }
+    while (nodes.length > kids.length) parent.removeChild(parent.lastChild);
+  }
+
+  /* ---- components ---- */
+  function DCLogic(props) { this.props = props || {}; this.state = {}; }
+  DCLogic.prototype.setState = function (partial, cb) {
+    var p = typeof partial === 'function' ? partial(this.state, this.props) : partial;
+    this.state = Object.assign({}, this.state, p || {});
+    this.update(); if (cb) cb();
+  };
+  DCLogic.prototype.forceUpdate = function (cb) { this.update(); if (cb) cb(); };
+  DCLogic.prototype.renderVals = function () { return {}; };
+  DCLogic.prototype.update = function () {
+    var self = this;
+    if (self.__pending) return;
+    self.__pending = true;
+    Promise.resolve().then(function () { self.__pending = false; self.__render(); });
+  };
+  DCLogic.prototype.__render = function () {
+    if (!this.__host.isConnected && this.__mounted) return;
+    var vals;
+    try { vals = this.renderVals() || {}; } catch (e) { console.error(e); vals = {}; }
+    var kids = build(this.__def.body, vals, 'x-dc', []);
+    patchChildren(this.__host, this.__vkids || [], kids, false, null);
+    this.__vkids = kids;
+    if (!this.__mounted) { this.__mounted = true; if (this.componentDidMount) this.componentDidMount(); }
+  };
+
+  var registry = {};
+  function load(key) {
+    if (registry[key]) return registry[key];
+    var src = window.DC_FILES[key];
+    if (src == null) throw new Error('Missing screen ' + key);
+    var tree = parse(src);
+    var xdc = find(tree, function (n) { return n.tag === 'x-dc'; }) || tree;
+    var helmet = find(xdc, function (n) { return n.tag === 'helmet'; });
+    var script = find(tree, function (n) { return n.tag === 'script' && 'data-dc-script' in n.attrs; });
+    var defaults = {};
+    try { var dp = JSON.parse((script && script.attrs['data-props']) || '{}'); Object.keys(dp).forEach(function (k) { if (k[0] !== '$' && dp[k] && 'default' in dp[k]) defaults[k] = dp[k]['default']; }); } catch (e) {}
+    var Comp = null;
+    try { Comp = new Function('DCLogic', textOf(script) + '\n;return typeof Component !== "undefined" ? Component : null;')(DCLogic); } catch (e) { console.error(key, e); }
+    var head = [];
+    if (helmet) helmet.children.forEach(function (c) {
+      if (typeof c === 'string') return;
+      if (c.tag === 'style') head.push({ tag: 'style', text: textOf(c) });
+      else if (c.tag === 'link') head.push({ tag: 'link', attrs: c.attrs });
+    });
+    var imports = find(xdc, function (n) { return n.tag === 'dc-import'; }, true).map(function (n) { return (n.attrs.name || '').replace(/\.dc\.html$/, ''); });
+    registry[key] = { Comp: Comp || DCLogic, body: xdc.children.filter(function (c) { return c !== helmet; }), head: head, defaults: defaults, imports: imports, title: textOf(find(tree, function (n) { return n.tag === 'title'; })) };
+    return registry[key];
+  }
+  function instantiate(key, props, host) {
+    var def = load(key), all = Object.assign({}, def.defaults, props || {});
+    var inst = new def.Comp(all);
+    inst.props = all; inst.state = inst.state || {}; inst.defaults = def.defaults;
+    inst.__def = def; inst.__host = host;
+    inst.__render();
+    return inst;
+  }
+
+  /* ---- per-screen <helmet> styles ---- */
+  var headEls = [];
+  function setHead(key) {
+    headEls.forEach(function (el) { el.remove(); }); headEls = [];
+    var seen = {}, keys = [];
+    (function collect(k) { if (seen[k]) return; seen[k] = 1; keys.push(k); load(k).imports.forEach(collect); })(key);
+    var ids = {};
+    keys.reverse().forEach(function (k) {
+      load(k).head.forEach(function (it) {
+        var id = it.tag + (it.text || JSON.stringify(it.attrs)); if (ids[id]) return; ids[id] = 1;
+        var el = document.createElement(it.tag);
+        if (it.text != null) el.textContent = it.text; else Object.keys(it.attrs).forEach(function (a) { el.setAttribute(a, it.attrs[a]); });
+        document.head.appendChild(el); headEls.push(el);
+      });
+    });
+  }
+
+  /* ---- router ---- */
+  var ALIAS = { demo: 'DemoGuide', guide: 'DemoGuide', signin: 'Auth', login: 'Auth' };
+  function current() { var p = decodeURIComponent(location.pathname).replace(/\/+$/, '').replace(/^\//, '').replace(/\.dc\.html$/, ''); p = ALIAS[p.toLowerCase()] || p; return p && window.DC_FILES[p] ? p : 'Home'; }
+  function show() {
+    var key = current(), root = document.getElementById('root');
+    setHead(key);
+    root.innerHTML = '';
+    var host = document.createElement('div'); host.style.display = 'contents'; root.appendChild(host);
+    instantiate(key, {}, host);
+    var t = load(key).title.replace(/\s*·\s*CareLend Partner Portal\s*$/, '');
+    document.title = (t ? t + ' · ' : '') + 'CareLend Partner HR Portal';
+  }
+  function start() {
+    window.addEventListener('popstate', show);
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest && e.target.closest('a[data-route]'); if (!a) return;
+      e.preventDefault(); history.pushState(null, '', a.getAttribute('data-route')); show(); window.scrollTo(0, 0);
+    });
+    show();
+  }
+  window.DCRuntime = { start: start };
+})();
+</script>
+<script>fetch('/screens.json').then(function (r) { return r.json(); }).then(function (f) { window.DC_FILES = f; DCRuntime.start(); });</script>
+</body></html>
