@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><rect width="256" height="256" rx="48" fill="#B8235A"/>
+<g fill="#FFFFFF"><circle cx="88" cy="78" r="16"/><circle cx="128" cy="66" r="18"/><circle cx="168" cy="78" r="16"/>
+<path d="M62 150 c0-30 14-46 26-46 s26 16 26 46z" opacity=".8"/><path d="M98 150 c0-34 16-54 30-54 s30 20 30 54z"/><path d="M142 150 c0-30 14-46 26-46 s26 16 26 46z" opacity=".8"/></g>
+<text x="128" y="202" text-anchor="middle" font-family='Helvetica Neue, Arial, sans-serif' font-size="28" font-weight="800" fill="#FFFFFF" letter-spacing="1">BOLE WOMEN</text>
+<text x="128" y="226" text-anchor="middle" font-family='Helvetica Neue, Arial, sans-serif' font-size="13" font-weight="600" fill="#FFD3E2" letter-spacing="4">SAVINGS GROUP</text></svg>

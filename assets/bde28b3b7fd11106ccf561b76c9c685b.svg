@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><rect width="256" height="256" rx="48" fill="#FFB020"/>
+<path d="M56 96 L72 60 H184 L200 96 Z" fill="#1F1F1F"/>
+<g fill="#FFFFFF"><path d="M86 60 h20 l-6 36 h-20 z"/><path d="M126 60 h20 l2 36 h-20 z" transform="translate(-9 0)"/><path d="M164 60 h20 l10 36 h-20 z" transform="translate(-14 0)"/></g>
+<path d="M56 96 q18 18 36 0 q18 18 36 0 q18 18 36 0 q18 18 36 0" fill="#1F1F1F"/>
+<rect x="76" y="112" width="104" height="44" rx="6" fill="#1F1F1F" opacity=".9"/>
+<text x="128" y="204" text-anchor="middle" font-family='Helvetica Neue, Arial, sans-serif' font-size="32" font-weight="800" fill="#1F1F1F" letter-spacing="1">MERKATO</text>
+<text x="128" y="226" text-anchor="middle" font-family='Helvetica Neue, Arial, sans-serif' font-size="13" font-weight="700" fill="#1F1F1F" letter-spacing="5">TRADERS ASSN.</text></svg>

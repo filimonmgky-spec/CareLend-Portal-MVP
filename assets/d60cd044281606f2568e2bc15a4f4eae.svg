@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><rect width="256" height="256" rx="48" fill="#FBF5EA"/>
+<g fill="#B8862B"><rect x="116" y="40" width="24" height="120" rx="4"/><rect x="76" y="80" width="104" height="24" rx="4"/>
+<circle cx="128" cy="40" r="12"/><circle cx="128" cy="160" r="12"/><circle cx="76" cy="92" r="12"/><circle cx="180" cy="92" r="12"/></g>
+<circle cx="128" cy="92" r="9" fill="#FBF5EA"/>
+<text x="128" y="208" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="700" fill="#5A3E12" letter-spacing="2">LALIBELA</text>
+<text x="128" y="230" text-anchor="middle" font-family='Helvetica Neue, Arial, sans-serif' font-size="13" font-weight="600" fill="#B8862B" letter-spacing="6">HOTELS GROUP</text></svg>
