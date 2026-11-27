@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="-1 -1 66 66">
+<defs>
+<linearGradient id="b" x1="8" y1="0" x2="34" y2="46" gradientUnits="userSpaceOnUse"><stop stop-color="#A3C3FF"/><stop offset="1" stop-color="#2D5FEA"/></linearGradient>
+<linearGradient id="e" x1="14" y1="14" x2="58" y2="62" gradientUnits="userSpaceOnUse"><stop stop-color="#fff" stop-opacity=".9"/><stop offset=".45" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity=".05"/></linearGradient>
+<linearGradient id="g" x1="54" y1="22" x2="24" y2="56" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity=".55"/></linearGradient>
+<linearGradient id="w" x1="20" y1="16" x2="56" y2="60" gradientUnits="userSpaceOnUse"><stop stop-color="#fff" stop-opacity=".38"/><stop offset="1" stop-color="#fff" stop-opacity=".06"/></linearGradient>
+<filter id="fb" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+<filter id="ds" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="1.6" dy="2" stdDeviation="1.8" flood-color="rgb(74,128,255)" flood-opacity=".55"/></filter>
+<clipPath id="c"><path d="M23 18H51Q54 18 54 21V60L50.60 56.5L47.20 60L43.80 56.5L40.40 60L37.00 56.5L33.60 60L30.20 56.5L26.80 60L23.40 56.5L20.00 60V21Q20 18 23 18Z"/></clipPath>
+</defs>
+<g transform="rotate(0 22 22)"><path d="M21 4A17 17 0 1 1 4 21H21Z" fill="url(#b)"/></g>
+<g opacity=".35" filter="url(#glow)"><g transform="rotate(0 22 22)"><path d="M21 4A17 17 0 1 1 4 21H21Z" fill="#2D5FEA"/></g></g>
+<path d="M23 18H51Q54 18 54 21V60L50.60 56.5L47.20 60L43.80 56.5L40.40 60L37.00 56.5L33.60 60L30.20 56.5L26.80 60L23.40 56.5L20.00 60V21Q20 18 23 18Z" fill="#2D5FEA" opacity=".22" filter="url(#glow)" transform="translate(1.5 3)"/>
+<g clip-path="url(#c)">
+<path d="M23 18H51Q54 18 54 21V60L50.60 56.5L47.20 60L43.80 56.5L40.40 60L37.00 56.5L33.60 60L30.20 56.5L26.80 60L23.40 56.5L20.00 60V21Q20 18 23 18Z" fill="#4F82FF" fill-opacity=".62"/>
+<g filter="url(#fb)"><g transform="rotate(0 22 22)"><path d="M21 4A17 17 0 1 1 4 21H21Z" fill="url(#b)"/></g></g>
+<path d="M23 18H51Q54 18 54 21V60L50.60 56.5L47.20 60L43.80 56.5L40.40 60L37.00 56.5L33.60 60L30.20 56.5L26.80 60L23.40 56.5L20.00 60V21Q20 18 23 18Z" fill="url(#w)"/>
+</g>
+<path d="M23 18H51Q54 18 54 21V60L50.60 56.5L47.20 60L43.80 56.5L40.40 60L37.00 56.5L33.60 60L30.20 56.5L26.80 60L23.40 56.5L20.00 60V21Q20 18 23 18Z" stroke="url(#e)" stroke-width="1"/>
+<g filter="url(#ds)"><path d="M27 28H47" stroke="url(#g)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M27 35H47" stroke="url(#g)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M27 42H38" stroke="url(#g)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="-1 -1 66 66">
+<defs>
+<linearGradient id="b" x1="8" y1="0" x2="34" y2="46" gradientUnits="userSpaceOnUse"><stop stop-color="#FF9DB2"/><stop offset="1" stop-color="#D4254E"/></linearGradient>
+<linearGradient id="e" x1="14" y1="14" x2="58" y2="62" gradientUnits="userSpaceOnUse"><stop stop-color="#fff" stop-opacity=".9"/><stop offset=".45" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity=".05"/></linearGradient>
+<linearGradient id="g" x1="54" y1="22" x2="24" y2="56" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity=".55"/></linearGradient>
+<linearGradient id="w" x1="20" y1="16" x2="56" y2="60" gradientUnits="userSpaceOnUse"><stop stop-color="#fff" stop-opacity=".38"/><stop offset="1" stop-color="#fff" stop-opacity=".06"/></linearGradient>
+<filter id="fb" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+<filter id="ds" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="1.6" dy="2" stdDeviation="1.8" flood-color="rgb(212,37,78)" flood-opacity=".55"/></filter>
+<clipPath id="c"><path d="M19 22H32.72L37.12 27H57Q60 27 60 30V56Q60 59 57 59H19Q16 59 16 56V25Q16 22 19 22Z"/></clipPath>
+</defs>
+<g transform="rotate(-8 22 22)"><path d="M19.65 6.86Q22.00 5.00 24.35 6.86L36.65 16.58Q39.00 18.44 39.00 21.44L39.00 34.00Q39.00 37.00 36.00 37.00L8.00 37.00Q5.00 37.00 5.00 34.00L5.00 21.44Q5.00 18.44 7.35 16.58Z" fill="url(#b)"/></g>
+<g opacity=".35" filter="url(#glow)"><g transform="rotate(-8 22 22)"><path d="M19.65 6.86Q22.00 5.00 24.35 6.86L36.65 16.58Q39.00 18.44 39.00 21.44L39.00 34.00Q39.00 37.00 36.00 37.00L8.00 37.00Q5.00 37.00 5.00 34.00L5.00 21.44Q5.00 18.44 7.35 16.58Z" fill="#D4254E"/></g></g>
+<path d="M19 22H32.72L37.12 27H57Q60 27 60 30V56Q60 59 57 59H19Q16 59 16 56V25Q16 22 19 22Z" fill="#D4254E" opacity=".22" filter="url(#glow)" transform="translate(1.5 3)"/>
+<g clip-path="url(#c)">
+<path d="M19 22H32.72L37.12 27H57Q60 27 60 30V56Q60 59 57 59H19Q16 59 16 56V25Q16 22 19 22Z" fill="#E8456A" fill-opacity=".62"/>
+<g filter="url(#fb)"><g transform="rotate(-8 22 22)"><path d="M19.65 6.86Q22.00 5.00 24.35 6.86L36.65 16.58Q39.00 18.44 39.00 21.44L39.00 34.00Q39.00 37.00 36.00 37.00L8.00 37.00Q5.00 37.00 5.00 34.00L5.00 21.44Q5.00 18.44 7.35 16.58Z" fill="url(#b)"/></g></g>
+<path d="M19 22H32.72L37.12 27H57Q60 27 60 30V56Q60 59 57 59H19Q16 59 16 56V25Q16 22 19 22Z" fill="url(#w)"/>
+</g>
+<path d="M19 22H32.72L37.12 27H57Q60 27 60 30V56Q60 59 57 59H19Q16 59 16 56V25Q16 22 19 22Z" stroke="url(#e)" stroke-width="1"/>
+<g filter="url(#ds)"><path d="M30 39.5L38 33L46 39.5V49H30Z" stroke="url(#g)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M36 49V44H40V49" stroke="url(#g)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+</svg>
